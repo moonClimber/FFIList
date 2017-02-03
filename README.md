@@ -13,4 +13,4 @@ The project uses mvvmCross framework and has he following structure:
  4. FFIList.WindowsPhone.FFSource (*WP81 client linked to FFImageLoading local folder*)
  5. FFIList.WindowsPhone.Shared (*Common code shared by FFIList.WindowsPhone and FFIList.WindowsPhone.FFSource*)
  
- To test this project you have just to choose the active project between  
+ To test this project you have just to choose the active project between "FFIList.WindowsPhone" and "FFIList.WindowsPhone.FFSource"
