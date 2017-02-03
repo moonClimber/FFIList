@@ -1,0 +1,71 @@
+﻿<views:MvxWindowsPage
+    x:Class="FFIList.WindowsPhone.Views.ImagesListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FFIList.WindowsPhone.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ffImageLoading="using:FFImageLoading"
+    xmlns:views="using:MvvmCross.WindowsCommon.Views"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Page.Resources>
+    <CollectionViewSource x:Name="PageViewSource" Source="{Binding Items}" />
+    <DataTemplate x:Name="ItemTemplate">
+      <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10,1">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="{Binding ImageIndex}" FontSize="20" Margin="10,0"/>
+          <ffImageLoading:FFImage
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          MaxHeight="80"
+          MaxWidth="80"
+          TransformPlaceholders="False"
+          LoadingPlaceholder="Images/placeholder.jpg"
+          ErrorPlaceholder="Images/error.jpg"
+          CacheDuration="30"
+          RetryCount="3"
+          RetryDelay="250"
+          DownsampleToViewSize="True"
+          DownsampleMode="Default"
+          Source="{Binding ImageUrl}" />
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+  </Page.Resources>
+
+
+
+  <Grid x:Name="LayoutRoot">
+
+    <Grid.ChildrenTransitions>
+      <TransitionCollection>
+        <EntranceThemeTransition/>
+      </TransitionCollection>
+    </Grid.ChildrenTransitions>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Title Panel -->
+    <StackPanel Grid.Row="0" x:Name="ContentRoot" Margin="19,9.5,19,0">
+      <TextBlock Text="FFIList" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+      <TextBlock Text="List of images" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+    </StackPanel>
+
+    <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
+      <ItemsControl
+          VerticalAlignment="Stretch"
+          HorizontalAlignment="Stretch"
+          ItemsSource="{Binding Source={StaticResource PageViewSource}}"
+          ItemTemplate="{StaticResource ItemTemplate}" />
+    </ScrollViewer>
+    <Button Grid.Row="2" HorizontalAlignment="Stretch" Content="Back" Command="{Binding GoBack}" Margin="10,0" />
+  </Grid>
+
+
+
+</views:MvxWindowsPage>
